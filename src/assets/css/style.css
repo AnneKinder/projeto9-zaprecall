@@ -130,6 +130,17 @@
   right: 10px;
 }
 
-h2 {
+.icon-pergunta {
+  color: blue;
   cursor: pointer;
+}
+
+.icon-resposta {
+  color: rgb(213, 26, 213);
+  cursor: pointer;
+  width: 5px;
+}
+
+.hidden {
+  display: none;
 }
