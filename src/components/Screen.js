@@ -55,16 +55,16 @@ let ANSWERS = [
 
 export default function Screen() {
   let [clicadas, setClicadas] = React.useState([]);
-  let [perguntasViradas, setperguntasViradas] = React.useState([]);
-  let [texto, setTexto] = React.useState("Pergunta Teste");
 
   function showQuestion(front, i) {
-    let perguntasArray = [...perguntasViradas, front];
+    //trocar ternario pra ifs?
+  }
+
+  function showAnswer() {
+    //
   }
 
   function TurnCard(front, i) {
-    //trocar o texto
-    //trocar o ícone
     let clicadasArray = [...clicadas, front];
     setClicadas(clicadasArray); //trocar classe
     showQuestion(front, i); // trocar {texto}
@@ -83,14 +83,31 @@ export default function Screen() {
             clicadas.includes(front) ? "pergunta-aberta" : "pergunta-fechada"
           }
         >
-          <p>{clicadas.includes(front) ? QUESTIONS[i] : FRONT[i]}</p>
-          <h2
+          <p>{clicadas.includes(front) ? cards[i].question : FRONT[i]}</p>
+          <div
+            className={
+              clicadas.includes(front)
+                ? "icon-pergunta hidden"
+                : "icon-pergunta"
+            }
             onClick={() => {
               TurnCard(front, i);
             }}
           >
             D
-          </h2>
+          </div>
+          <div
+            className={
+              clicadas.includes(front)
+                ? "icon-resposta"
+                : "icon-resposta hidden"
+            }
+            onClick={() => {
+              showAnswer();
+            }}
+          >
+            R{" "}
+          </div>
         </div>
       ))}
 
