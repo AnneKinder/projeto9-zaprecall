@@ -1,7 +1,5 @@
-//import logo from "/src/assets/img/logo.png";
+import logo from "/src/img/logo.png";
 import React from "react";
-
-let closedQuestions = ["Pergunta 1", "Pergunta 2", "Pergunta 3", "Pergunta 4"];
 
 let cards = [
   {
@@ -39,33 +37,57 @@ let cards = [
   }
 ];
 
-export default function Screen() {
-  let [cardClass, setcardClass] = React.useState("pergunta-fechada");
-  //let [title, setTitle] = React.useState(closedQuestions[i])
-  let [icon, setIcon] = React.useState("D")
+let FRONT = ["Pergunta 1", "Pergunta 2", "Pergunta 3", "Pergunta 4"];
 
-  function TurnCard(title, i) {
-    setcardClass("pergunta-aberta")
-    
+let QUESTIONS = [
+  "O que é JSX?",
+  "O React é __",
+  "Componentes devem iniciar com __",
+  "Podemos colocar __ dentro do JSX"
+];
+
+let ANSWERS = [
+  "Uma extensão de linguagem do JavaScript",
+  "uma biblioteca JavaScript para construção de interfaces",
+  "letra maiúscula",
+  "expressões"
+];
+
+export default function Screen() {
+  let [clicadas, setClicadas] = React.useState([]);
+  // let [cardClass, setcardClass] = React.useState("pergunta-fechada");
+  // let [texto, setTexto] = React.useState("");
+
+  function TurnCard(front, i) {
+    //trocar o texto
+    //trocar o ícone
+    let clicadasArray = [...clicadas, front];
+    setClicadas(clicadasArray);
   }
-//        
 
   return (
     <div className="screen-container">
       <div className="logo-container">
-      {/* <img src={logo} alt="logo" /> */}
+        <img src={logo} alt="logo" />
         <h1> ZapRecall </h1>
       </div>
 
-
-      {closedQuestions.map((title, i) => (
-        <div 
-        className={cardClass} 
-        key={i}
-        index={i}
-        icon={icon}>
-          <p>{title}</p>
-          <h2 onClick={() => TurnCard(title, i)}> {icon} </h2>
+      {FRONT.map((front, i) => (
+        <div
+          className={
+            clicadas.includes(front) ? "pergunta-aberta" : "pergunta-fechada"
+          }
+        >
+          <p>
+            {FRONT[i]} {/*  {texto}  */}{" "}
+          </p>
+          <h2
+            onClick={() => {
+              TurnCard(front, i);
+            }}
+          >
+            D
+          </h2>
         </div>
       ))}
 
