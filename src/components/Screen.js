@@ -55,14 +55,19 @@ let ANSWERS = [
 
 export default function Screen() {
   let [clicadas, setClicadas] = React.useState([]);
-  // let [cardClass, setcardClass] = React.useState("pergunta-fechada");
-  // let [texto, setTexto] = React.useState("");
+  let [perguntasViradas, setperguntasViradas] = React.useState([]);
+  let [texto, setTexto] = React.useState("Pergunta Teste");
+
+  function showQuestion(front, i) {
+    let perguntasArray = [...perguntasViradas, front];
+  }
 
   function TurnCard(front, i) {
     //trocar o texto
     //trocar o ícone
     let clicadasArray = [...clicadas, front];
-    setClicadas(clicadasArray);
+    setClicadas(clicadasArray); //trocar classe
+    showQuestion(front, i); // trocar {texto}
   }
 
   return (
@@ -78,9 +83,7 @@ export default function Screen() {
             clicadas.includes(front) ? "pergunta-aberta" : "pergunta-fechada"
           }
         >
-          <p>
-            {FRONT[i]} {/*  {texto}  */}{" "}
-          </p>
+          <p>{clicadas.includes(front) ? QUESTIONS[i] : FRONT[i]}</p>
           <h2
             onClick={() => {
               TurnCard(front, i);
