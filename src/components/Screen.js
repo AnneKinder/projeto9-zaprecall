@@ -55,19 +55,22 @@ let ANSWERS = [
 
 export default function Screen() {
   let [clicadas, setClicadas] = React.useState([]);
+  let [resposta, setResposta] = React.useState([]);
 
-  function showQuestion(front, i) {
-    //trocar ternario pra ifs?
+  function showAnswer(front, i, answer) {
+    console.log(front);
+    console.log(i);
+    console.log(answer);
+    let respostaMostrada = [...resposta, front];
+    setResposta(respostaMostrada);
   }
 
-  function showAnswer() {
-    //
-  }
+  let [conteudo, setConteudo] = React.useState("question");
 
   function TurnCard(front, i) {
+    //Clicou no D -> Mostra pergunta cards[i].question
     let clicadasArray = [...clicadas, front];
-    setClicadas(clicadasArray); //trocar classe
-    showQuestion(front, i); // trocar {texto}
+    setClicadas(clicadasArray);
   }
 
   return (
@@ -103,7 +106,7 @@ export default function Screen() {
                 : "icon-resposta hidden"
             }
             onClick={() => {
-              showAnswer();
+              showAnswer(front, i, cards[i].answer);
             }}
           >
             R{" "}
