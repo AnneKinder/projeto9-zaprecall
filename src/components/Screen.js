@@ -1,6 +1,11 @@
-//import logo from "/src/img/logo.png";
+import logo from "/src/img/logo.png";
+import setaplay from "/src/img/seta_play.png";
+import setavirar from "/src/img/seta_virar.png";
 import React from "react";
-import styled from "styled-components"
+import styled from "styled-components";
+import right from "/src/img/icone_certo.png";
+import wrong from "/src/img/icone_erro.png";
+import almost from "/src/img/icone_quase.png";
 
 let cards = [
   {
@@ -46,74 +51,86 @@ let cards = [
   }
 ];
 
-let FRONT = ["Pergunta 1", "Pergunta 2", "Pergunta 3", "Pergunta 4"];
-
-let QUESTIONS = [
-  "O que é JSX?",
-  "O React é __",
-  "Componentes devem iniciar com __",
-  "Podemos colocar __ dentro do JSX"
-];
-
-let ANSWERS = [
-  "Uma extensão de linguagem do JavaScript",
-  "uma biblioteca JavaScript para construção de interfaces",
-  "letra maiúscula",
-  "expressões"
-];
-
 function CardContent(props) {
-  const { i, card, numberQ, question, answer } = props;
+  const { card, i, numberQ, question, answer } = props;
 
-  let [changeText, setchangeText] = React.useState( numberQ );
-  let [changeClass, setchangeClass] = React.useState("pergunta-fechada")
-  let [changeIcon, setchangeIcon] = React.useState( "D" );
-  let [changeClick, setchangeClick] = React.useState( "D" );
+  let [changeText, setchangeText] = React.useState(numberQ);
+  let [changeClass, setchangeClass] = React.useState("pergunta-fechada");
+  let [changeIcon, setchangeIcon] = React.useState(setaplay);
+  let [turnedCard, setturnedCard] = React.useState([]);
+  let [mostrarBotoes, setmostrarBotoes] = React.useState("");
 
+  function turnCard(card, i) {
+    setchangeClass("pergunta-aberta");
+    if (changeIcon === setaplay) {
+      //mostrar pergunta
+      setchangeText(question);
+      setchangeIcon(setavirar);
+    }
+    if (changeIcon === setavirar) {
+      //mostrar resposta
+      setchangeText(answer);
+      setchangeIcon("");
+      setmostrarBotoes(InsertButton); // mostrar botoes
 
-
-  function TurnCard() {
-    setchangeClass("pergunta-aberta")
-     if(changeIcon==="D"){
-      setchangeText(question)
-      setchangeIcon("R")
-    } if (changeIcon==="R"){
-      setchangeText(answer)
-      setchangeIcon("")
+      let turnedArray = [...turnedCard, card]; //insere card na array de viradas
+      setturnedCard(turnedArray);
+      turnedAnswers(card, i);
     }
   }
 
+  function turnedAnswers(card, i) {
+    // console.log(card);
+    //  console.log(i);
+  }
+
+  function InsertButton() {
+    return (
+      <>
+        <Button onClick={() => endNao(card)}> Não lembrei </Button>
+        <Button onClick={() => endQuase(card)}> Quase não lembrei </Button>
+        <Button onClick={() => endZap(card)}> Zap </Button>
+      </>
+    );
+  }
+
+  function endNao(card) {
+    setchangeClass("pergunta-fechada");
+    setchangeText(card.numberQ);
+    setmostrarBotoes("");
+    setchangeIcon(wrong);
+  }
+
+  function endQuase(card) {
+    setchangeClass("pergunta-fechada");
+    setchangeText(card.numberQ);
+    setmostrarBotoes("");
+    setchangeIcon(almost);
+  }
+
+  function endZap(card) {
+    setchangeClass("pergunta-fechada");
+    setchangeText(card.numberQ);
+    setmostrarBotoes("");
+    setchangeIcon(right);
+  }
 
   return (
     <div className={changeClass}>
       <p>{changeText}</p>
-      <div className="icon-pergunta" onClick={() => TurnCard()}>
-        {changeIcon}
+      <ContainerBotoes>{mostrarBotoes}</ContainerBotoes>
+      <div className="icon-pergunta" onClick={() => turnCard(card, i)}>
+        <img src={changeIcon} alt="" />
       </div>
-      <div className="icon-resposta hidden">R </div>
     </div>
   );
 }
 
-
-
 export default function Screen() {
-  let [resposta, setResposta] = React.useState([]);
-
-  function showAnswer(front, i, answer) {
-    console.log(front);
-    console.log(i);
-    console.log(answer);
-    let respostaMostrada = [...resposta, front];
-    setResposta(respostaMostrada);
-  }
-
-  let [conteudo, setConteudo] = React.useState("question");
-
   return (
     <ScreenContainer>
       <LogoContainer>
-        {/* <img src={logo} alt="logo" /> */}
+        <img src={logo} alt="logo" />
         <h1> ZapRecall </h1>
       </LogoContainer>
 
@@ -124,23 +141,16 @@ export default function Screen() {
           answer={card.answer}
           card={card}
           i={i}
+          key={i}
         />
       ))}
 
-      <FooterConcluidos>
-        <div className="container-botoes">
-          <Button> Não lembrei </Button>
-          <Button> Quase não lembrei </Button>
-          <Button> Zap </Button>
-        </div>
-      </FooterConcluidos>
+      <FooterConcluidos></FooterConcluidos>
     </ScreenContainer>
   );
 }
 
-
 const ScreenContainer = styled.div`
-
   background-color: #fb6b6b;
   width: 100vw;
   min-height: 100vh;
@@ -151,7 +161,7 @@ const ScreenContainer = styled.div`
   padding: 0px;
   padding-bottom: 200px;
 
-    .pergunta-fechada {
+  .pergunta-fechada {
     width: 300px;
     height: 35px;
     background-color: #ffffff;
@@ -163,17 +173,17 @@ const ScreenContainer = styled.div`
     align-items: center;
     justify-content: space-between;
 
-        .p {
-        font-family: "Recursive";
-        font-style: normal;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 19px;
-        color: #333333;
-      }
-   }
+    .p {
+      font-family: "Recursive";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 19px;
+      color: #333333;
+    }
+  }
 
-    .pergunta-aberta {
+  .pergunta-aberta {
     width: 300px;
     margin: 12px;
     padding: 15px;
@@ -192,16 +202,13 @@ const ScreenContainer = styled.div`
     flex-direction: column;
     justify-content: space-between;
 
-        .img {
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-      }
+    .img {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
   }
-
-
-
-`
+`;
 
 const LogoContainer = styled.div`
   display: flex;
@@ -221,8 +228,7 @@ const LogoContainer = styled.div`
     color: #ffffff;
     margin-left: 20px;
   }
-
-`
+`;
 const FooterConcluidos = styled.div`
   width: 100%;
   min-height: 50px;
@@ -238,32 +244,32 @@ const FooterConcluidos = styled.div`
   font-size: 18px;
   color: #333333;
   padding: 10px;
+`;
 
-  .container-botoes {
-    display: flex;
-    width: 80%;
-    justify-content: space-between;
-    margin: 20px;
-      
-  }
-`
+const ContainerBotoes = styled.div`
+  display: flex;
+  width: 50%;
+  height: 30px;
+  justify-content: space-between;
+  margin: 20px;
+`;
+
 const Button = styled.button`
-      color:blue;
-      width: 90px;
-      font-family: "Recursive";
-      font-style: normal;
-      font-weight: 400;
-      font-size: 12px;
-      line-height: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #ffffff;
-      background: blue;
-      border-radius: 5px;
-      border: 1px solid blue;
-      padding: 5px;
-      cursor: pointer;
-      
-`
+  color: yellow;
+  width: 90px;
+  font-family: "Recursive";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+  background: blue;
+  border-radius: 5px;
+  border: 1px solid blue;
+  padding: 5px;
+  cursor: pointer;
+`;
