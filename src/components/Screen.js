@@ -1,36 +1,45 @@
-import logo from "/src/img/logo.png";
+//import logo from "/src/img/logo.png";
 import React from "react";
+import styled from "styled-components"
 
 let cards = [
   {
+    numberQ: "Pergunta 1",
     question: "O que é JSX?",
     answer: "Uma extensão de linguagem do JavaScript"
   },
   {
+    numberQ: "Pergunta 2",
     question: "O React é __",
     answer: "uma biblioteca JavaScript para construção de interfaces"
   },
   {
+    numberQ: "Pergunta 3",
     question: "Componentes devem iniciar com __",
     answer: "letra maiúscula"
   },
   {
+    numberQ: "Pergunta 4",
     question: "Podemos colocar __ dentro do JSX",
     answer: "expressões"
   },
   {
+    numberQ: "Pergunta 5",
     question: "O ReactDOM nos ajuda __",
     answer: "interagindo com a DOM para colocar componentes React na mesma"
   },
   {
+    numberQ: "Pergunta 6",
     question: "Usamos o npm para __",
     answer: "gerenciar os pacotes necessários e suas dependências"
   },
   {
+    numberQ: "Pergunta 7",
     question: "Usamos props para __",
     answer: "passar diferentes informações para componentes "
   },
   {
+    numberQ: "Pergunta 8",
     question: "Usamos estado (state) para __ ",
     answer:
       "dizer para o React quais informações quando atualizadas devem renderizar a tela novamente"
@@ -53,8 +62,42 @@ let ANSWERS = [
   "expressões"
 ];
 
+function CardContent(props) {
+  const { i, card, numberQ, question, answer } = props;
+
+  let [changeText, setchangeText] = React.useState( numberQ );
+  let [changeClass, setchangeClass] = React.useState("pergunta-fechada")
+  let [changeIcon, setchangeIcon] = React.useState( "D" );
+  let [changeClick, setchangeClick] = React.useState( "D" );
+
+
+
+  function TurnCard() {
+    setchangeClass("pergunta-aberta")
+     if(changeIcon==="D"){
+      setchangeText(question)
+      setchangeIcon("R")
+    } if (changeIcon==="R"){
+      setchangeText(answer)
+      setchangeIcon("")
+    }
+  }
+
+
+  return (
+    <div className={changeClass}>
+      <p>{changeText}</p>
+      <div className="icon-pergunta" onClick={() => TurnCard()}>
+        {changeIcon}
+      </div>
+      <div className="icon-resposta hidden">R </div>
+    </div>
+  );
+}
+
+
+
 export default function Screen() {
-  let [clicadas, setClicadas] = React.useState([]);
   let [resposta, setResposta] = React.useState([]);
 
   function showAnswer(front, i, answer) {
@@ -67,60 +110,83 @@ export default function Screen() {
 
   let [conteudo, setConteudo] = React.useState("question");
 
-  function TurnCard(front, i) {
-    //Clicou no D -> Mostra pergunta cards[i].question
-    let clicadasArray = [...clicadas, front];
-    setClicadas(clicadasArray);
-  }
-
   return (
-    <div className="screen-container">
-      <div className="logo-container">
-        <img src={logo} alt="logo" />
+    <ScreenContainer>
+      <LogoContainer>
+        {/* <img src={logo} alt="logo" /> */}
         <h1> ZapRecall </h1>
-      </div>
+      </LogoContainer>
 
-      {FRONT.map((front, i) => (
-        <div
-          className={
-            clicadas.includes(front) ? "pergunta-aberta" : "pergunta-fechada"
-          }
-        >
-          <p>{clicadas.includes(front) ? cards[i].question : FRONT[i]}</p>
-          <div
-            className={
-              clicadas.includes(front)
-                ? "icon-pergunta hidden"
-                : "icon-pergunta"
-            }
-            onClick={() => {
-              TurnCard(front, i);
-            }}
-          >
-            D
-          </div>
-          <div
-            className={
-              clicadas.includes(front)
-                ? "icon-resposta"
-                : "icon-resposta hidden"
-            }
-            onClick={() => {
-              showAnswer(front, i, cards[i].answer);
-            }}
-          >
-            R{" "}
-          </div>
-        </div>
+      {cards.map((card, i) => (
+        <CardContent
+          numberQ={card.numberQ}
+          question={card.question}
+          answer={card.answer}
+          card={card}
+          i={i}
+        />
       ))}
 
-      <div className="footer-concluidos">
+      <FooterConcluidos>
         <div className="container-botoes">
           <button> Não lembrei </button>
           <button> Quase não lembrei </button>
           <button> Zap </button>
         </div>
-      </div>
-    </div>
+      </FooterConcluidos>
+    </ScreenContainer>
   );
 }
+
+
+const ScreenContainer = styled.div`
+
+  background-color: #fb6b6b;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 200px;
+
+`
+
+const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 40px 0 20px 0;
+
+  img {
+    width: 52px;
+  }
+
+  h1 {
+    font-family: "Righteous";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 45px;
+    color: #ffffff;
+    margin-left: 20px;
+  }
+
+`
+const FooterConcluidos = styled.div`
+  width: 100%;
+  min-height: 50px;
+  background-color: #ffffff;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Recursive";
+  font-weight: 400;
+  font-size: 18px;
+  color: #333333;
+  padding: 10px;
+
+`
