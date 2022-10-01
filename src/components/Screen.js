@@ -55,34 +55,64 @@ function CardContent(props) {
   let [changeClass, setchangeClass] = React.useState("pergunta-fechada");
   let [changeIcon, setchangeIcon] = React.useState(setaplay);
   let [turnedCard, setturnedCard] = React.useState([]);
+  let [mostrarBotoes, setmostrarBotoes] = React.useState("");
 
   function turnCard(card, i) {
     setchangeClass("pergunta-aberta");
     if (changeIcon === setaplay) {
+      //mostrar pergunta
       setchangeText(question);
       setchangeIcon(setavirar);
     }
     if (changeIcon === setavirar) {
+      //mostrar resposta
       setchangeText(answer);
       setchangeIcon("");
+      setmostrarBotoes(InsertButton); // mostrar botoes
 
-      let turnedArray = [...turnedCard, card];
+      let turnedArray = [...turnedCard, card]; //insere card na array de viradas
       setturnedCard(turnedArray);
-      finalizarCard(card, i);
+      turnedAnswers(card, i);
     }
   }
 
-  function finalizarCard(card, i) {
-   // console.log(card);
-  //  console.log(i);
+  function turnedAnswers(card, i) {
+    // console.log(card);
+    //  console.log(i);
+  }
 
+  function InsertButton() {
+    return (
+      <>
+        <Button onClick={() => endNao(card)}> Não lembrei </Button>
+        <Button onClick={() => endQuase(card)}> Quase não lembrei </Button>
+        <Button onClick={() => endZap(card)}> Zap </Button>
+      </>
+    );
+  }
 
-  
+  function endNao(card) {
+    setchangeClass("pergunta-fechada");
+    setchangeText(card.numberQ);
+    setmostrarBotoes("");
+  }
+
+  function endQuase(card) {
+    setchangeClass("pergunta-fechada");
+    setchangeText(card.numberQ);
+    setmostrarBotoes("");
+  }
+
+  function endZap(card) {
+    setchangeClass("pergunta-fechada");
+    setchangeText(card.numberQ);
+    setmostrarBotoes("");
   }
 
   return (
     <div className={changeClass}>
       <p>{changeText}</p>
+      <ContainerBotoes>{mostrarBotoes}</ContainerBotoes>
       <div className="icon-pergunta" onClick={() => turnCard(card, i)}>
         <img src={changeIcon} alt="" />
       </div>
@@ -109,13 +139,7 @@ export default function Screen() {
         />
       ))}
 
-      <FooterConcluidos>
-        <div className="container-botoes">
-          <Button> Não lembrei </Button>
-          <Button> Quase não lembrei </Button>
-          <Button> Zap </Button>
-        </div>
-      </FooterConcluidos>
+      <FooterConcluidos></FooterConcluidos>
     </ScreenContainer>
   );
 }
@@ -214,16 +238,18 @@ const FooterConcluidos = styled.div`
   font-size: 18px;
   color: #333333;
   padding: 10px;
-
-  .container-botoes {
-    display: flex;
-    width: 80%;
-    justify-content: space-between;
-    margin: 20px;
-  }
 `;
+
+const ContainerBotoes = styled.div`
+  display: flex;
+  width: 50%;
+  height: 30px;
+  justify-content: space-between;
+  margin: 20px;
+`;
+
 const Button = styled.button`
-  color: blue;
+  color: yellow;
   width: 90px;
   font-family: "Recursive";
   font-style: normal;
