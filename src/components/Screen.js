@@ -1,11 +1,11 @@
-import logo from "/src/img/logo.png";
-import setaplay from "/src/img/seta_play.png";
-import setavirar from "/src/img/seta_virar.png";
+import logo from "../assets/img/logo.png";
+import setaplay from "../assets/img/seta_play.png";
+import setavirar from "../assets/img/seta_virar.png";
 import React from "react";
 import styled from "styled-components";
-import right from "/src/img/icone_certo.png";
-import wrong from "/src/img/icone_erro.png";
-import almost from "/src/img/icone_quase.png";
+import right from "../assets/img/icone_certo.png";
+import wrong from "../assets/img/icone_erro.png";
+import almost from "../assets/img/icone_quase.png";
 
 let cards = [
   {
