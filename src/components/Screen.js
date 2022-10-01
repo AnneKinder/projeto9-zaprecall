@@ -3,6 +3,9 @@ import setaplay from "/src/img/seta_play.png";
 import setavirar from "/src/img/seta_virar.png";
 import React from "react";
 import styled from "styled-components";
+import right from "/src/img/icone_certo.png";
+import wrong from "/src/img/icone_erro.png";
+import almost from "/src/img/icone_quase.png";
 
 let cards = [
   {
@@ -95,18 +98,21 @@ function CardContent(props) {
     setchangeClass("pergunta-fechada");
     setchangeText(card.numberQ);
     setmostrarBotoes("");
+    setchangeIcon(wrong);
   }
 
   function endQuase(card) {
     setchangeClass("pergunta-fechada");
     setchangeText(card.numberQ);
     setmostrarBotoes("");
+    setchangeIcon(almost);
   }
 
   function endZap(card) {
     setchangeClass("pergunta-fechada");
     setchangeText(card.numberQ);
     setmostrarBotoes("");
+    setchangeIcon(right);
   }
 
   return (
