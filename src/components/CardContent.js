@@ -14,6 +14,7 @@ let counter = 0
 
 export default function CardContent(props) {
     const { card, i, numberQ, question, answer } = props;
+    
   
     let [changeText, setchangeText] = React.useState(numberQ);
     let [changeClass, setchangeClass] = React.useState("pergunta-fechada");
@@ -22,7 +23,7 @@ export default function CardContent(props) {
     let [textColor, setTextColor] = React.useState("#333333")
     let [lineThrough, setlineThrough] = React.useState("")
 
-
+ 
    
 
   
@@ -75,6 +76,7 @@ export default function CardContent(props) {
       setTextColor("#FF3030");
       setlineThrough("line-through");
       counter=0
+     
     
       
     }
@@ -87,6 +89,7 @@ export default function CardContent(props) {
       setTextColor("#FF922E");
       setlineThrough("line-through");
       counter=0
+     
       
       
     }
@@ -98,14 +101,13 @@ export default function CardContent(props) {
       setchangeIcon(right);
       setTextColor("#2FBE34");
       setlineThrough("line-through");
-      counter=0
+     
      
       
     }
   
 
       
-
 
 
 

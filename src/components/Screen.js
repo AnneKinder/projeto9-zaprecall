@@ -8,6 +8,8 @@ import CardContent from "./CardContent"
 
 export default function Screen() {
 
+
+
   return (
     <ScreenContainer>
       <LogoContainer/>

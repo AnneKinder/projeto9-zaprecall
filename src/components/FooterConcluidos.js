@@ -1,10 +1,14 @@
 import styled from "styled-components"
-import count from "./CardContent"
+import counter from "./counter.js"
 
-export default function FooterConcluidos(){
+
+export default function FooterConcluidos(props){
+
+  const {teste} = props
+
     return(
         <FooterConc data-identifier="flashcard-counter">
-        counter
+       <p>{counter}</p>
         </FooterConc>
     )
 }
