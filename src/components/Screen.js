@@ -176,7 +176,7 @@ const ScreenContainer = styled.div`
     .p {
       font-family: "Recursive";
       font-style: normal;
-      font-weight: 700;
+      font-weight: 400;
       font-size: 16px;
       line-height: 19px;
       color: #333333;
@@ -209,7 +209,6 @@ const ScreenContainer = styled.div`
     }
   }
 `;
-
 const LogoContainer = styled.div`
   display: flex;
   align-items: center;
@@ -244,18 +243,17 @@ const FooterConcluidos = styled.div`
   font-size: 18px;
   color: #333333;
   padding: 10px;
-`;
-
+  
+`
 const ContainerBotoes = styled.div`
   display: flex;
-  width: 50%;
+  width: 50px;
   height: 30px;
   justify-content: space-between;
   margin: 20px;
-`;
-
+  `
 const Button = styled.button`
-  color: yellow;
+  color: white;
   width: 90px;
   font-family: "Recursive";
   font-style: normal;
@@ -267,9 +265,9 @@ const Button = styled.button`
   justify-content: center;
   text-align: center;
   color: #ffffff;
-  background: blue;
+  background: orange;
   border-radius: 5px;
-  border: 1px solid blue;
+  border: 1px solid yellow;
   padding: 5px;
   cursor: pointer;
 `;
