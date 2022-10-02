@@ -19,12 +19,10 @@ export default function CardContent(props) {
     function turnCard(card, i) {
       setchangeClass("pergunta-aberta");
       if (changeIcon === setaplay) {
-        //mostrar pergunta
         setchangeText(question);
         setchangeIcon(setavirar);
       }
       if (changeIcon === setavirar) {
-        //mostrar resposta
         setchangeText(answer);
         setchangeIcon("");
         setmostrarBotoes(InsertButton); // mostrar botoes
@@ -124,9 +122,13 @@ export default function CardContent(props) {
       bottom: 10px;
       right: 10px;
     }
-  }
-`;
 
+    & > p{
+        width: 75%;
+    }
+
+  }
+`
 const P = styled.p`
         width: 50%;
       font-family: "Recursive";
@@ -141,14 +143,13 @@ const P = styled.p`
 
 
 `
-
 const ContainerBotoes = styled.div`
   display: flex;
   width: 90%;
   height: 40px;
   justify-content: space-between;
   margin-top: 20px;
-  `
+`
 const Button = styled.button`
   color: white;
   width: 90px;
@@ -179,4 +180,4 @@ const Button = styled.button`
   &:last-child{
     background-color: #2FBE34;
   }
-`;
+`
