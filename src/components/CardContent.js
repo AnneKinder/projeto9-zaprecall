@@ -12,9 +12,10 @@ export default function CardContent(props) {
     let [changeText, setchangeText] = React.useState(numberQ);
     let [changeClass, setchangeClass] = React.useState("pergunta-fechada");
     let [changeIcon, setchangeIcon] = React.useState(setaplay);
-    let [turnedCard, setturnedCard] = React.useState([]);
     let [mostrarBotoes, setmostrarBotoes] = React.useState("");
-  
+    let [textColor, setTextColor] = React.useState("#333333")
+    let [lineThrough, setlineThrough] = React.useState("")
+    
     function turnCard(card, i) {
       setchangeClass("pergunta-aberta");
       if (changeIcon === setaplay) {
@@ -46,6 +47,8 @@ export default function CardContent(props) {
       setchangeText(card.numberQ);
       setmostrarBotoes("");
       setchangeIcon(wrong);
+      setTextColor("#FF3030");
+      setlineThrough("line-through");
     }
   
     function endQuase(card) {
@@ -53,6 +56,8 @@ export default function CardContent(props) {
       setchangeText(card.numberQ);
       setmostrarBotoes("");
       setchangeIcon(almost);
+      setTextColor("#FF922E");
+      setlineThrough("line-through");
     }
   
     function endZap(card) {
@@ -60,12 +65,14 @@ export default function CardContent(props) {
       setchangeText(card.numberQ);
       setmostrarBotoes("");
       setchangeIcon(right);
+      setTextColor("#2FBE34");
+      setlineThrough("line-through");
     }
   
     return (
         <CardCont>
       <div className={changeClass}>
-        <p>{changeText}</p>
+        <P cor={textColor} decoration={lineThrough}>{changeText}</P>
         <ContainerBotoes>{mostrarBotoes}</ContainerBotoes>
         <div className="icon-pergunta" onClick={() => turnCard(card, i)}>
           <img src={changeIcon} alt="" />
@@ -90,15 +97,7 @@ export default function CardContent(props) {
     align-items: center;
     justify-content: space-between;
 
-    & > p {
-        width: 50%;
-      font-family: "Recursive";
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 19px;
-      color: #333333;;
-    }
+
   }
 
   .pergunta-aberta {
@@ -128,6 +127,20 @@ export default function CardContent(props) {
   }
 `;
 
+const P = styled.p`
+        width: 50%;
+      font-family: "Recursive";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 19px;
+      color: ${props=>props.cor};
+      text-decoration-line: ${props=>props.decoration};
+      text-decoration-thickness: 3px;
+      text-decoration-color: ${props=>props.cor};
+
+
+`
 
 const ContainerBotoes = styled.div`
   display: flex;
