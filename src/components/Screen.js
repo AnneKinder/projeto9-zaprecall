@@ -22,7 +22,7 @@ export default function Screen() {
         />
       ))}
 
-      <FooterConcluidos/>
+      <FooterConcluidos data-identifier="flashcard-counter" />
     </ScreenContainer>
   );
 }

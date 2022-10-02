@@ -33,9 +33,9 @@ export default function CardContent(props) {
     function InsertButton() {
       return (
         <>
-          <Button onClick={() => endNao(card)}> Não lembrei </Button>
-          <Button onClick={() => endQuase(card)}> Quase não lembrei </Button>
-          <Button onClick={() => endZap(card)}> Zap </Button>
+          <Button onClick={() => endNao(card)} data-identifier="forgot-btn"> Não lembrei </Button>
+          <Button onClick={() => endQuase(card)} data-identifier="almost-forgot-btn" > Quase não lembrei </Button>
+          <Button onClick={() => endZap(card)} data-identifier="zap-btn"> Zap </Button>
         </>
       );
     }
@@ -68,12 +68,12 @@ export default function CardContent(props) {
     }
   
     return (
-        <CardCont>
-      <div className={changeClass}>
+        <CardCont data-identifier="flashcard">
+      <div className={changeClass} data-identifier="flashcard-index-item">
         <P cor={textColor} decoration={lineThrough}>{changeText}</P>
         <ContainerBotoes>{mostrarBotoes}</ContainerBotoes>
-        <div className="icon-pergunta" onClick={() => turnCard(card, i)}>
-          <img src={changeIcon} alt="" />
+        <div data-identifier="flashcard-show-btn" className="icon-pergunta" onClick={() => turnCard(card, i)}>
+          <img data-identifier="flashcard-status" src={changeIcon} alt="" />
         </div>
       </div>
       </CardCont>
