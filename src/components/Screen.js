@@ -1,138 +1,15 @@
-import logo from "../assets/img/logo.png";
-import setaplay from "../assets/img/seta_play.png";
-import setavirar from "../assets/img/seta_virar.png";
 import React from "react";
 import styled from "styled-components";
-import right from "../assets/img/icone_certo.png";
-import wrong from "../assets/img/icone_erro.png";
-import almost from "../assets/img/icone_quase.png";
+import cards from "./cards.js"
+import LogoContainer from "./LogoContainer.js"
+import FooterConcluidos from "./FooterConcluidos"
+import CardContent from "./CardContent"
 
-let cards = [
-  {
-    numberQ: "Pergunta 1",
-    question: "O que é JSX?",
-    answer: "Uma extensão de linguagem do JavaScript"
-  },
-  {
-    numberQ: "Pergunta 2",
-    question: "O React é __",
-    answer: "uma biblioteca JavaScript para construção de interfaces"
-  },
-  {
-    numberQ: "Pergunta 3",
-    question: "Componentes devem iniciar com __",
-    answer: "letra maiúscula"
-  },
-  {
-    numberQ: "Pergunta 4",
-    question: "Podemos colocar __ dentro do JSX",
-    answer: "expressões"
-  },
-  {
-    numberQ: "Pergunta 5",
-    question: "O ReactDOM nos ajuda __",
-    answer: "interagindo com a DOM para colocar componentes React na mesma"
-  },
-  {
-    numberQ: "Pergunta 6",
-    question: "Usamos o npm para __",
-    answer: "gerenciar os pacotes necessários e suas dependências"
-  },
-  {
-    numberQ: "Pergunta 7",
-    question: "Usamos props para __",
-    answer: "passar diferentes informações para componentes "
-  },
-  {
-    numberQ: "Pergunta 8",
-    question: "Usamos estado (state) para __ ",
-    answer:
-      "dizer para o React quais informações quando atualizadas devem renderizar a tela novamente"
-  }
-];
-
-function CardContent(props) {
-  const { card, i, numberQ, question, answer } = props;
-
-  let [changeText, setchangeText] = React.useState(numberQ);
-  let [changeClass, setchangeClass] = React.useState("pergunta-fechada");
-  let [changeIcon, setchangeIcon] = React.useState(setaplay);
-  let [turnedCard, setturnedCard] = React.useState([]);
-  let [mostrarBotoes, setmostrarBotoes] = React.useState("");
-
-  function turnCard(card, i) {
-    setchangeClass("pergunta-aberta");
-    if (changeIcon === setaplay) {
-      //mostrar pergunta
-      setchangeText(question);
-      setchangeIcon(setavirar);
-    }
-    if (changeIcon === setavirar) {
-      //mostrar resposta
-      setchangeText(answer);
-      setchangeIcon("");
-      setmostrarBotoes(InsertButton); // mostrar botoes
-
-      let turnedArray = [...turnedCard, card]; //insere card na array de viradas
-      setturnedCard(turnedArray);
-      turnedAnswers(card, i);
-    }
-  }
-
-  function turnedAnswers(card, i) {
-    // console.log(card);
-    //  console.log(i);
-  }
-
-  function InsertButton() {
-    return (
-      <>
-        <Button onClick={() => endNao(card)}> Não lembrei </Button>
-        <Button onClick={() => endQuase(card)}> Quase não lembrei </Button>
-        <Button onClick={() => endZap(card)}> Zap </Button>
-      </>
-    );
-  }
-
-  function endNao(card) {
-    setchangeClass("pergunta-fechada");
-    setchangeText(card.numberQ);
-    setmostrarBotoes("");
-    setchangeIcon(wrong);
-  }
-
-  function endQuase(card) {
-    setchangeClass("pergunta-fechada");
-    setchangeText(card.numberQ);
-    setmostrarBotoes("");
-    setchangeIcon(almost);
-  }
-
-  function endZap(card) {
-    setchangeClass("pergunta-fechada");
-    setchangeText(card.numberQ);
-    setmostrarBotoes("");
-    setchangeIcon(right);
-  }
-
-  return (
-    <div className={changeClass}>
-      <p>{changeText}</p>
-      <ContainerBotoes>{mostrarBotoes}</ContainerBotoes>
-      <div className="icon-pergunta" onClick={() => turnCard(card, i)}>
-        <img src={changeIcon} alt="" />
-      </div>
-    </div>
-  );
-}
 
 export default function Screen() {
   return (
     <ScreenContainer>
-      <LogoContainer>
-        <img src={logo} alt="logo" />
-        <h1> ZapRecall </h1>
-      </LogoContainer>
+      <LogoContainer/>
 
       {cards.map((card, i) => (
         <CardContent
@@ -145,7 +22,7 @@ export default function Screen() {
         />
       ))}
 
-      <FooterConcluidos></FooterConcluidos>
+      <FooterConcluidos/>
     </ScreenContainer>
   );
 }
@@ -161,113 +38,4 @@ const ScreenContainer = styled.div`
   padding: 0px;
   padding-bottom: 200px;
 
-  .pergunta-fechada {
-    width: 300px;
-    height: 35px;
-    background-color: #ffffff;
-    margin: 12px;
-    padding: 15px;
-    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .p {
-      font-family: "Recursive";
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 19px;
-      color: #333333;
-    }
-  }
-
-  .pergunta-aberta {
-    width: 300px;
-    margin: 12px;
-    padding: 15px;
-    min-height: 100px;
-    background: #ffffd5;
-    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
-    border-radius: 5px;
-    font-family: "Recursive";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-    color: #333333;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    .img {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-    }
-  }
-`;
-const LogoContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 40px 0 20px 0;
-
-  img {
-    width: 52px;
-  }
-
-  h1 {
-    font-family: "Righteous";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 36px;
-    line-height: 45px;
-    color: #ffffff;
-    margin-left: 20px;
-  }
-`;
-const FooterConcluidos = styled.div`
-  width: 100%;
-  min-height: 50px;
-  background-color: #ffffff;
-  position: fixed;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: "Recursive";
-  font-weight: 400;
-  font-size: 18px;
-  color: #333333;
-  padding: 10px;
-  
 `
-const ContainerBotoes = styled.div`
-  display: flex;
-  width: 50px;
-  height: 30px;
-  justify-content: space-between;
-  margin: 20px;
-  `
-const Button = styled.button`
-  color: white;
-  width: 90px;
-  font-family: "Recursive";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #ffffff;
-  background: orange;
-  border-radius: 5px;
-  border: 1px solid yellow;
-  padding: 5px;
-  cursor: pointer;
-`;
