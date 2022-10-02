@@ -1,9 +1,10 @@
 import styled from "styled-components"
+import count from "./CardContent"
 
 export default function FooterConcluidos(){
     return(
-        <FooterConc>
-        ?/8 concluidos 
+        <FooterConc data-identifier="flashcard-counter">
+        counter
         </FooterConc>
     )
 }

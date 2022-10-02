@@ -7,6 +7,7 @@ import CardContent from "./CardContent"
 
 
 export default function Screen() {
+
   return (
     <ScreenContainer>
       <LogoContainer/>
@@ -19,10 +20,11 @@ export default function Screen() {
           card={card}
           i={i}
           key={i}
+          
         />
       ))}
 
-      <FooterConcluidos data-identifier="flashcard-counter" />
+      <FooterConcluidos  />
     </ScreenContainer>
   );
 }

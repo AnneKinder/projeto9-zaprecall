@@ -6,6 +6,12 @@ import right from "../assets/img/icone_certo.png";
 import wrong from "../assets/img/icone_erro.png";
 import almost from "../assets/img/icone_quase.png";
 
+
+
+let counter = 0
+
+
+
 export default function CardContent(props) {
     const { card, i, numberQ, question, answer } = props;
   
@@ -15,21 +21,37 @@ export default function CardContent(props) {
     let [mostrarBotoes, setmostrarBotoes] = React.useState("");
     let [textColor, setTextColor] = React.useState("#333333")
     let [lineThrough, setlineThrough] = React.useState("")
-    
+
+
+   
+
+  
     function turnCard(card, i) {
-      setchangeClass("pergunta-aberta");
+
+
+    
+      
       if (changeIcon === setaplay) {
-        setchangeText(question);
-        setchangeIcon(setavirar);
+        if (counter===0){
+          setchangeClass("pergunta-aberta");
+          setchangeText(question);
+          setchangeIcon(setavirar);
+          counter+=1
       }
+
+    }
+      
       if (changeIcon === setavirar) {
         setchangeText(answer);
         setchangeIcon("");
         setmostrarBotoes(InsertButton); // mostrar botoes
       }
     }
-  
-  
+     
+
+
+
+
     function InsertButton() {
       return (
         <>
@@ -39,6 +61,11 @@ export default function CardContent(props) {
         </>
       );
     }
+
+
+
+
+
   
     function endNao(card) {
       setchangeClass("pergunta-fechada");
@@ -47,6 +74,9 @@ export default function CardContent(props) {
       setchangeIcon(wrong);
       setTextColor("#FF3030");
       setlineThrough("line-through");
+      counter=0
+    
+      
     }
   
     function endQuase(card) {
@@ -56,6 +86,9 @@ export default function CardContent(props) {
       setchangeIcon(almost);
       setTextColor("#FF922E");
       setlineThrough("line-through");
+      counter=0
+      
+      
     }
   
     function endZap(card) {
@@ -65,8 +98,18 @@ export default function CardContent(props) {
       setchangeIcon(right);
       setTextColor("#2FBE34");
       setlineThrough("line-through");
+      counter=0
+     
+      
     }
   
+
+      
+
+
+
+
+
     return (
         <CardCont data-identifier="flashcard">
       <div className={changeClass} data-identifier="flashcard-index-item">
@@ -81,7 +124,10 @@ export default function CardContent(props) {
   }
 
 
-  const CardCont = styled.div`
+
+
+
+const CardCont = styled.div`
 
   .pergunta-fechada {
     width: 300px;
