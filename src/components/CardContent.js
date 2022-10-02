@@ -27,17 +27,9 @@ export default function CardContent(props) {
         setchangeText(answer);
         setchangeIcon("");
         setmostrarBotoes(InsertButton); // mostrar botoes
-  
-        let turnedArray = [...turnedCard, card]; //insere card na array de viradas
-        setturnedCard(turnedArray);
-        turnedAnswers(card, i);
       }
     }
   
-    function turnedAnswers(card, i) {
-      // console.log(card);
-      //  console.log(i);
-    }
   
     function InsertButton() {
       return (
@@ -85,6 +77,7 @@ export default function CardContent(props) {
 
 
   const CardCont = styled.div`
+
   .pergunta-fechada {
     width: 300px;
     height: 35px;
@@ -97,13 +90,14 @@ export default function CardContent(props) {
     align-items: center;
     justify-content: space-between;
 
-    .p {
+    & > p {
+        width: 50%;
       font-family: "Recursive";
       font-style: normal;
       font-weight: 400;
       font-size: 16px;
       line-height: 19px;
-      color: #333333;
+      color: #333333;;
     }
   }
 
@@ -126,7 +120,7 @@ export default function CardContent(props) {
     flex-direction: column;
     justify-content: space-between;
 
-    .img {
+    & > img {
       position: absolute;
       bottom: 10px;
       right: 10px;
@@ -137,10 +131,10 @@ export default function CardContent(props) {
 
 const ContainerBotoes = styled.div`
   display: flex;
-  width: 50px;
-  height: 30px;
+  width: 90%;
+  height: 40px;
   justify-content: space-between;
-  margin: 20px;
+  margin-top: 20px;
   `
 const Button = styled.button`
   color: white;
@@ -155,9 +149,21 @@ const Button = styled.button`
   justify-content: center;
   text-align: center;
   color: #ffffff;
-  background: orange;
   border-radius: 5px;
-  border: 1px solid yellow;
+  border: 1px solid #ffffd5;
   padding: 5px;
+  margin: 2px;
   cursor: pointer;
+
+  &:first-child{
+    background-color: #FF3030;
+  }
+
+  &:nth-child(2){
+    background-color: #FF922E;
+  }
+
+  &:last-child{
+    background-color: #2FBE34;
+  }
 `;
