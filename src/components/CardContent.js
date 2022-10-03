@@ -101,7 +101,7 @@ export default function CardContent(props) {
       setchangeIcon(right);
       setTextColor("#2FBE34");
       setlineThrough("line-through");
-     
+      counter =0;
      
       
     }
