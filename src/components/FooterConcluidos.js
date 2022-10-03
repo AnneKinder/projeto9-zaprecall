@@ -1,11 +1,11 @@
 import styled from "styled-components"
-import counter from "./counter.js"
 
 
-export default function FooterConcluidos() {
+export default function FooterConcluidos(props) {
+  const { contador } = props;
   return (
     <FooterConc data-identifier="flashcard-counter">
-      <p data-identifier="flashcard-counter">{counter}</p>
+      <p data-identifier="flashcard-counter">{contador}/8</p>
     </FooterConc>
   );
 }
