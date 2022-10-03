@@ -1,3 +1,3 @@
-let counter= "oi"
+let counter = "?/8";
 
-export default counter
+export default counter;
