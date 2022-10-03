@@ -13,42 +13,31 @@ let counter = 0;
 
 
 export default function CardContent(props) {
-    const { card, i, numberQ, question, answer } = props;
-    
-  
-    let [changeText, setchangeText] = React.useState(numberQ);
-    let [changeClass, setchangeClass] = React.useState("pergunta-fechada");
-    let [changeIcon, setchangeIcon] = React.useState(setaplay);
-    let [mostrarBotoes, setmostrarBotoes] = React.useState("");
-    let [textColor, setTextColor] = React.useState("#333333")
-    let [lineThrough, setlineThrough] = React.useState("")
+  const { card, i, numberQ, question, answer, contador, setContador } = props;
 
- 
-   
+  let [changeText, setchangeText] = React.useState(numberQ);
+  let [changeClass, setchangeClass] = React.useState("pergunta-fechada");
+  let [changeIcon, setchangeIcon] = React.useState(setaplay);
+  let [mostrarBotoes, setmostrarBotoes] = React.useState("");
+  let [textColor, setTextColor] = React.useState("#333333");
+  let [lineThrough, setlineThrough] = React.useState("");
 
-  
-    function turnCard(card, i) {
-
-
-    
-      
-      if (changeIcon === setaplay) {
-        if (turningcounter===0){
-          setchangeClass("pergunta-aberta");
-          setchangeText(question);
-          setchangeIcon(setavirar);
-          turningcounter+=1
-      }
-
-    }
-      
-      if (changeIcon === setavirar) {
-        setchangeText(answer);
-        setchangeIcon("");
-        setmostrarBotoes(InsertButton);
+  function turnCard(card, i) {
+    if (changeIcon === setaplay) {
+      if (turningcounter === 0) {
+        setchangeClass("pergunta-aberta");
+        setchangeText(question);
+        setchangeIcon(setavirar);
+        turningcounter += 1;
       }
     }
-     
+
+    if (changeIcon === setavirar) {
+      setchangeText(answer);
+      setchangeIcon("");
+      setmostrarBotoes(InsertButton);
+    }
+  }
 
 
 
@@ -66,7 +55,7 @@ export default function CardContent(props) {
 
 
   
-   function endNao(card) {
+  function endNao(card) {
     setchangeClass("pergunta-fechada");
     setchangeText(card.numberQ);
     setmostrarBotoes("");
@@ -75,7 +64,7 @@ export default function CardContent(props) {
     setlineThrough("line-through");
     turningcounter = 0;
     counter += 1;
-    console.log(counter);
+    setContador(counter);
   }
 
   function endQuase(card) {
@@ -87,7 +76,7 @@ export default function CardContent(props) {
     setlineThrough("line-through");
     turningcounter = 0;
     counter += 1;
-    console.log(counter);
+    setContador(counter);
   }
 
   function endZap(card) {
@@ -99,9 +88,8 @@ export default function CardContent(props) {
     setlineThrough("line-through");
     turningcounter = 0;
     counter += 1;
-    console.log(counter);
+    setContador(counter);
   }
-  
 
       
 
