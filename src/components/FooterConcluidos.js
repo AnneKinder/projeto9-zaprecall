@@ -2,15 +2,12 @@ import styled from "styled-components"
 import counter from "./counter.js"
 
 
-export default function FooterConcluidos(props){
-
-  const {teste} = props
-
-    return(
-        <FooterConc data-identifier="flashcard-counter">
-       <p>{counter}</p>
-        </FooterConc>
-    )
+export default function FooterConcluidos() {
+  return (
+    <FooterConc data-identifier="flashcard-counter">
+      <p data-identifier="flashcard-counter">{counter}</p>
+    </FooterConc>
+  );
 }
 
 const FooterConc = styled.div`
