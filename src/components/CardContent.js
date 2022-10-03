@@ -45,7 +45,7 @@ export default function CardContent(props) {
       if (changeIcon === setavirar) {
         setchangeText(answer);
         setchangeIcon("");
-        setmostrarBotoes(InsertButton); // mostrar botoes
+        setmostrarBotoes(InsertButton);
       }
     }
      
