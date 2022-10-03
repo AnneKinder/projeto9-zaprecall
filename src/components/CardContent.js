@@ -9,7 +9,7 @@ import almost from "../assets/img/icone_quase.png";
 
 
 let turningcounter = 0
-
+let counter = 0;
 
 
 export default function CardContent(props) {
@@ -65,46 +65,42 @@ export default function CardContent(props) {
 
 
 
+  
+   function endNao(card) {
+    setchangeClass("pergunta-fechada");
+    setchangeText(card.numberQ);
+    setmostrarBotoes("");
+    setchangeIcon(wrong);
+    setTextColor("#FF3030");
+    setlineThrough("line-through");
+    turningcounter = 0;
+    counter += 1;
+    console.log(counter);
+  }
 
+  function endQuase(card) {
+    setchangeClass("pergunta-fechada");
+    setchangeText(card.numberQ);
+    setmostrarBotoes("");
+    setchangeIcon(almost);
+    setTextColor("#FF922E");
+    setlineThrough("line-through");
+    turningcounter = 0;
+    counter += 1;
+    console.log(counter);
+  }
 
-  
-    function endNao(card) {
-      setchangeClass("pergunta-fechada");
-      setchangeText(card.numberQ);
-      setmostrarBotoes("");
-      setchangeIcon(wrong);
-      setTextColor("#FF3030");
-      setlineThrough("line-through");
-      turningcounter=0
-     
-    
-      
-    }
-  
-    function endQuase(card) {
-      setchangeClass("pergunta-fechada");
-      setchangeText(card.numberQ);
-      setmostrarBotoes("");
-      setchangeIcon(almost);
-      setTextColor("#FF922E");
-      setlineThrough("line-through");
-      turningcounter=0
-     
-      
-      
-    }
-  
-    function endZap(card) {
-      setchangeClass("pergunta-fechada");
-      setchangeText(card.numberQ);
-      setmostrarBotoes("");
-      setchangeIcon(right);
-      setTextColor("#2FBE34");
-      setlineThrough("line-through");
-      turningcounter =0;
-     
-      
-    }
+  function endZap(card) {
+    setchangeClass("pergunta-fechada");
+    setchangeText(card.numberQ);
+    setmostrarBotoes("");
+    setchangeIcon(right);
+    setTextColor("#2FBE34");
+    setlineThrough("line-through");
+    turningcounter = 0;
+    counter += 1;
+    console.log(counter);
+  }
   
 
       
