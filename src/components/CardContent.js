@@ -8,7 +8,7 @@ import almost from "../assets/img/icone_quase.png";
 
 
 
-let counter = 0
+let turningcounter = 0
 
 
 
@@ -33,11 +33,11 @@ export default function CardContent(props) {
     
       
       if (changeIcon === setaplay) {
-        if (counter===0){
+        if (turningcounter===0){
           setchangeClass("pergunta-aberta");
           setchangeText(question);
           setchangeIcon(setavirar);
-          counter+=1
+          turningcounter+=1
       }
 
     }
@@ -75,7 +75,7 @@ export default function CardContent(props) {
       setchangeIcon(wrong);
       setTextColor("#FF3030");
       setlineThrough("line-through");
-      counter=0
+      turningcounter=0
      
     
       
@@ -88,7 +88,7 @@ export default function CardContent(props) {
       setchangeIcon(almost);
       setTextColor("#FF922E");
       setlineThrough("line-through");
-      counter=0
+      turningcounter=0
      
       
       
@@ -101,7 +101,7 @@ export default function CardContent(props) {
       setchangeIcon(right);
       setTextColor("#2FBE34");
       setlineThrough("line-through");
-      counter =0;
+      turningcounter =0;
      
       
     }
