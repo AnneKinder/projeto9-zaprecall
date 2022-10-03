@@ -7,12 +7,11 @@ import CardContent from "./CardContent"
 
 
 export default function Screen() {
-
-
+  let [contador, setContador] = React.useState("0");
 
   return (
     <ScreenContainer>
-      <LogoContainer/>
+      <LogoContainer />
 
       {cards.map((card, i) => (
         <CardContent
@@ -22,11 +21,12 @@ export default function Screen() {
           card={card}
           i={i}
           key={i}
-          
+          contador={contador}
+          setContador={setContador}
         />
       ))}
 
-      <FooterConcluidos  />
+      <FooterConcluidos contador={contador} />
     </ScreenContainer>
   );
 }
